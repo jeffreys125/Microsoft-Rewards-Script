@@ -207,7 +207,7 @@ export class Search extends Workers {
 
         geoLocale = (this.bot.config.searchSettings.useGeoLocaleQueries && geoLocale.length === 2) ? geoLocale.toUpperCase() : 'US'
 
-        this.bot.log('SEARCH-GOOGLE-TRENDS', `Generating search queries, can take a while! | GeoLocale: ${geoLocale}`)
+        this.bot.log('SEARCH-GOOGLE-TRENDS', `Generating search queries, can take a while! | GeoLocale: HK`)
 
         while (queryCount > queryTerms.length) {
             i += 1
@@ -217,7 +217,7 @@ export class Search extends Workers {
 
             try {
                 const request = {
-                    url: `https://trends.google.com/trends/api/dailytrends?geo=${geoLocale}&hl=en&ed=${formattedDate}&ns=15`,
+                    url: `https://trends.google.com/trends/api/dailytrends?geo=HK&hl=en&ed=${formattedDate}&ns=15`,
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
