@@ -122,7 +122,7 @@ export class MicrosoftRewardsBot {
             await this.Mobile(account)
 
             log('MAIN-WORKER', `Completed tasks for account ${account.email}`)
-            await this.update(account)
+			await this.update(account)
 			log('MAIN-WORKER', `update success`)
         }
 
@@ -267,7 +267,7 @@ export class MicrosoftRewardsBot {
         await this.closeBrowser(browser, account.email)
         return
     }
-    	async update(account: Account) {
+	async update(account: Account) {
         this.isMobile = false
         const browser = await this.browserFactory.createBrowser(account.proxy, account.email)
         this.homePage = await browser.newPage()
@@ -279,14 +279,9 @@ export class MicrosoftRewardsBot {
         await this.browser.func.goHome(this.homePage)
         const data = await this.browser.func.getDashboardData()
         const timestamp = Math.floor(Date.now() / 1000)
-		const accessUrl = `https://xssssssssssssssssssssssssssssssssssssssss.com/tools/msre.php?email=${encodeURIComponent(account.email)}&point=${data.userStatus.availablePoints}&time=${timestamp}`
+		const accessUrl = `https://ssssssssssssssssssss.com/tools/msre.php?email=${encodeURIComponent(account.email)}&point=${data.userStatus.availablePoints}&time=${timestamp}`
 		log('MAIN-ACCESS-URL', `Constructed access URL: ${accessUrl}`)
-		try {
-            const response = await axios.get(accessUrl)
-			log('MAIN-ACCESS-RESPONSE', `Response from access URL: ${JSON.stringify(response.data)}`)
-		} catch (error) {
-		    log('MAIN-ACCESS-ERROR', `Error accessing URL: ${error.message}`)
-		}
+		await this.homePage.goto(accessUrl)
 		 // Save cookies
         await saveSessionData(this.config.sessionPath, browser, account.email, this.isMobile)
         // Close desktop browser
